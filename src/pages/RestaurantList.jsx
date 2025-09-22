@@ -8,12 +8,25 @@ const RestaurantList = ({ searchTerm }) => {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    axios.get('postgresql://uaieats_db_user:44Ar1iwBb1VPM92OiIMVj69hdqRx1OQj@dpg-d38j7v3uibrs739sfijg-a/uaieats_db')
-      .then(response => setRestaurants(response.data))
-      .catch(error => console.error('Erro ao buscar restaurantes!', error));
-  }, []);
+    // 1. Pega a URL base do backend da variável de ambiente que configuramos no Render
+    const apiUrl = process.env.REACT_APP_API_URL;
 
-  // Filtra os restaurantes de acordo com o termo digitado
+    // 2. Define o caminho específico (endpoint) para buscar restaurantes
+    //    (Verifique se este é o caminho correto no seu arquivo urls.py do Django)
+    const endpoint = '/api/restaurantes/'; 
+
+    // 3. Faz a chamada de API para a URL correta (ex: https://seu-backend.onrender.com/api/restaurantes/)
+    axios.get(`${apiUrl}${endpoint}`)
+      .then(response => {
+        setRestaurants(response.data);
+      })
+      .catch(error => {
+        // Esta mensagem aparecerá no console do navegador se algo der errado
+        console.error('Erro ao buscar restaurantes!', error);
+      });
+  }, []); // O array vazio [] garante que esta lógica roda apenas uma vez, quando o componente é montado.
+
+  // Filtra os restaurantes de acordo com o termo digitado na busca
   const filteredRestaurants = restaurants.filter(restaurant =>
     restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
