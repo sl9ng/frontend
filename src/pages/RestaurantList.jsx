@@ -8,7 +8,7 @@ const RestaurantList = ({ searchTerm }) => {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/restaurants/')
+    axios.get('postgresql://uaieats_db_user:44Ar1iwBb1VPM92OiIMVj69hdqRx1OQj@dpg-d38j7v3uibrs739sfijg-a/uaieats_db')
       .then(response => setRestaurants(response.data))
       .catch(error => console.error('Erro ao buscar restaurantes!', error));
   }, []);

@@ -12,7 +12,7 @@ const RestaurantMenu = ({ addToCart }) => {
   const [restaurant, setRestaurant] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/restaurants/${id}/`)
+    axios.get(`postgresql://uaieats_db_user:44Ar1iwBb1VPM92OiIMVj69hdqRx1OQj@dpg-d38j7v3uibrs739sfijg-a/uaieats_db${id}/`)
       .then(response => {
         setRestaurant(response.data);
       })
