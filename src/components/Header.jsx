@@ -1,7 +1,7 @@
 import React, { useState } from 'react'; 
 import { useNavigate, Link } from 'react-router-dom';
 import './Header.css';
-import logo from '../assets/UaiEats_Logo.png'; 
+import logo from '../assets/UaiEats_logo.png'; 
 
 const Header = ({ user, logout, toggleCart, cartItemCount, searchTerm, setSearchTerm }) => {
     const navigate = useNavigate();
